@@ -1,3 +1,9 @@
+<%@page import="com.entity.student"%>
+<%@page import="com.conn.JDBCconn"%>
+<%@page import="com.dao.studentdao"%>
+<%@page import="com.servlet.registerservlet"%>
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -17,28 +23,38 @@
 					<div class="card-body">
 						<p class="fs-3 text-center">Edit Student</p>
 
-						<form action="" method="post">
+						<%
+						int id = Integer.parseInt(request.getParameter("id"));
+						studentdao dao = new studentdao(JDBCconn.getconn());
+						//student s= dao.getstudentById(id);
+						student s = dao.getstudentById(id);
+						%>
+
+						<form action="update" method="post">
 							<div class="mb-3">
-								<label class="form-label">Full Name</label> <input type="text" name="name"
+								<label class="form-label">Full Name</label> <input type="text"
+									value="<%=s.getFullname()%>" name="name" class="form-control">
+							</div>
+							<div class="mb-3">
+								<label class="form-label">DOB</label> <input type="date"
+									value="<%=s.getDob()%>" name="dob" class="form-control">
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Address</label> <input type="text"
+									value="<%=s.getAddress()%>" name="address"
 									class="form-control">
 							</div>
 							<div class="mb-3">
-								<label class="form-label">DOB</label> <input
-									type="date" name="dob" class="form-control">
-							</div>
-							<div class="mb-3">
-								<label class="form-label">Address</label> <input
-									type="text" name="address" class="form-control">
-							</div>
-							<div class="mb-3">
 								<label class="form-label">Qualification</label> <input
-									type="text" name="qualification" class="form-control">
+									type="text" value="<%=s.getQualification()%>"
+									name="qualification" class="form-control">
 							</div>
 							<div class="mb-3">
-								<label class="form-label">Email</label> <input
-									type="email" name="email" class="form-control">
+								<label class="form-label">Email</label> <input type="email"
+									name="email" value="<%=s.getEmail()%>>" class="form-control">
 							</div>
 
+							<input type="hidden" name="id" value="<%= s.getId()%>">
 
 							<button type="submit" class="btn btn-primary col-md-12">Update</button>
 						</form>

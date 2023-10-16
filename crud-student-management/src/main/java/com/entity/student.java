@@ -27,6 +27,17 @@ public class student {
 			this.email = email;
 		}
 
+		
+		public student(int id, String fullname, String dob, String address, String qualification, String email) {
+			super();
+			this.id = id;
+			this.fullname = fullname;
+			this.dob = dob;
+			this.address = address;
+			this.qualification = qualification;
+			this.email = email;
+		}
+
 		public int getId() {
 			return id;
 		}
